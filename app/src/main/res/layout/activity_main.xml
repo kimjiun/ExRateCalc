@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.kimjiun.exratecalc.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/TextViewTitle"
+                android:text="@string/main_title"/>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <TextView
+                        style="@style/TextViewTableLeft"
+                        android:text="@string/send_country"/>
+
+                    <TextView
+                        style="@style/TextViewTableRight"
+                        android:text="@string/country_usd"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        style="@style/TextViewTableLeft"
+                        android:text="@string/recieve_country"/>
+
+                    <TextView
+                        style="@style/TextViewTableRight"
+                        android:text="@{viewModel.countryText}"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        style="@style/TextViewTableLeft"
+                        android:text="@string/exchange_rate"/>
+
+                    <TextView
+                        style="@style/TextViewTableRight"
+                        android:text="@{viewModel.rateInfoData.quotes.toString()}"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        style="@style/TextViewTableLeft"
+                        android:text="@string/check_time"/>
+
+                    <TextView
+                        style="@style/TextViewTableRight"
+                        android:text="@{viewModel.timeText}"/>
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        style="@style/TextViewTableLeft"
+                        android:text="@string/remittance"/>
+
+                    <EditText
+                        android:maxLines="1"
+                        android:maxLength="16"
+                        android:inputType="numberDecimal"
+                        android:imeOptions="actionDone"
+                        android:onTextChanged="@{viewModel.onTextChanged}"/>
+
+                    <TextView
+                        style="@style/TextViewTableRight"
+                        android:text="@string/usd"/>
+                </TableRow>
+            </TableLayout>
+
+
+            <TextView
+                style="@style/TextViewResult"
+                android:text="@{@string/result_ment(viewModel.resultText)}"/>
+        </LinearLayout>
+
+        <NumberPicker
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
